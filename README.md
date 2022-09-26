@@ -71,10 +71,3 @@ github:-
 instagram
 -  [@anusthan_12](https://www.instagram.com/anusthan_12/)
 
-
-# Hi, I'm Anusthan! 👋
-
-
-## Other Common Github Profile Sections
-
-📫 How to reach me on instagram https://www.instagram.com/anusthan_12/
