@@ -21,8 +21,8 @@ A TRANSLATOR MADE USING USING HTML,CSS AND JAVASCRIPT HAVE VISUAL DELITE VISUAL 
 - Upto 500 words at one time
 
 
+
 ![image](https://user-images.githubusercontent.com/102304867/192353338-205ad93e-199f-45cf-a707-f9c8fe07e9a9.png)
-![image](https://user-images.githubusercontent.com/102304867/192353476-f84ac99a-2003-4652-9b2d-4c60e5a2013f.png)
 
 
 ## Authors
