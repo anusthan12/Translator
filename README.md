@@ -17,8 +17,8 @@ A TRANSLATOR MADE USING USING HTML,CSS AND JAVASCRIPT HAVE VISUAL DELITE VISUAL 
 - Responsive
 - More than 97 languages avaliable
 - Voice modulation
-- copy direct to clipboard
-- upto 500 words at one time
+- Copy direct to clipboard
+- Upto 500 words at one time
 
 
 
