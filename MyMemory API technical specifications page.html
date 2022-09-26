@@ -1,0 +1,356 @@
+
+<!-- saved from url=(0044)https://mymemory.translated.net/doc/spec.php -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>MyMemory API technical specifications</title>
+    <link rel="stylesheet" type="text/css" href="./MyMemory API technical specifications page_files/default.css">
+    <link rel="stylesheet" type="text/css" href="./MyMemory API technical specifications page_files/doc.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://mymemory.translated.net/public/img/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://mymemory.translated.net/public/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://mymemory.translated.net/public/img/favicon-16x16.png">
+    <link rel="mask-icon" href="https://mymemory.translated.net/public/img/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+
+<a href="https://mymemory.translated.net/" id="mm" title="go to homepage">
+    <img src="./MyMemory API technical specifications page_files/mym_logo_horizontal.svg" class="img-logo">
+</a>
+<ul id="mn">
+    <li><a href="http://mymemory.translated.net/">Home</a></li>
+    <li><a href="https://mymemory.translated.net/doc/">About MyMemory</a></li>
+    <li><a href="mailto:mymemory@translated.net?subject=MyMemory">Contact Us</a></li>
+    <!-- <li class="nb"><a href="/login_page.php?l=en">Login</a></li> -->
+</ul>
+<div class="cl"></div>
+
+
+<table id="mainFrame" style="float:left" width:="" "100%"="" cellpadding="0" cellmargin="0" border="0">
+<tbody><tr>
+    <td valign="top">
+        <ul class="lmen">
+            <li><a href="https://mymemory.translated.net/doc/">About MyMemory</a></li>
+            <li><a href="https://mymemory.translated.net/doc/features.php">MyMemory in detail</a></li>
+            <li><a href="https://mymemory.translated.net/doc/cat.php">CAT integration</a></li>
+            <li><a class="on" href="https://mymemory.translated.net/doc/spec.php">API specifications</a></li>
+            <li><a href="https://mymemory.translated.net/doc/usagelimits.php">Usage Limits</a></li>
+            <li><a href="https://mymemory.translated.net/doc/en/tos.php">Terms of Service</a></li>
+            <!--<li><a href="/doc/vision.php">Our vision</a></li>-->
+            <li><a href="https://mymemory.translated.net/">Search MyMemory</a></li>
+
+            <!-- <li><a href="terms-of-use.php">Terms of use</a></li> -->
+        </ul>
+
+        <h2 class="howto">How-To</h2>
+        <ul class="lmen">
+            <li><a href="https://mymemory.translated.net/doc/look-up-terms.php">Look up terms</a></li>
+            <li><a href="https://mymemory.translated.net/doc/from-source-document.php">Get a TM from a TXT</a></li>
+            <li><a href="https://mymemory.translated.net/doc/from-empty-tm.php">Get a TM from a TMX</a></li>
+            <li><a href="https://mymemory.translated.net/doc/contribute-tm.php">Contribute with a TM</a></li>
+        </ul>
+
+    </td>
+    <td width="90%" valign="top">
+        <div id="mainContent">
+            <h1>MyMemory: API technical specifications</h1>
+
+            <h2>Quick start with our REST API!</h2>
+            <ul>
+                <li><a href="https://mymemory.translated.net/doc/spec.php#TM">Search and contribute to the archive</a></li>
+                <li><a href="https://mymemory.translated.net/doc/spec.php#TMX">Import whole TMX memories to the archive</a></li>
+            </ul>
+
+            <p>Our REST API has been designed to be as easy as possible to implement. It's similar in the spirit to Google Translate API, extended with MyMemory specific parameters and lets you <b>search and contribute to MyMemory archives</b>.</p>
+            <p>Please, before you start, have a look at the <a href="https://mymemory.translated.net/doc/usagelimits.php">Usage Limits</a> and to the <a href="https://mymemory.translated.net/doc/en/tos.php">Terms of Service</a>.</p>
+            <br>
+            <h1 id="TM">Get</h1>
+            <p>Searches MyMemory for matches against a segment.</p>
+
+            <p></p>
+            <p>Call example: </p>
+            <p><strong><a href="https://api.mymemory.translated.net/get?q=Hello%20World!&amp;langpair=en|it" target="_blank">https://api.mymemory.translated.net/get?q=Hello World!&amp;langpair=en|it</a></strong></p>
+
+            <p>Parameter description:</p>
+
+            <table class="api">
+                <tbody><tr>
+                    <td class="api"><strong>Parameter</strong></td>
+                    <td class="api"><strong>Description</strong></td>
+                    <td class="api"><strong>Type</strong></td>
+                    <td class="api"><strong>Example value</strong></td>
+                </tr>
+                <tr>
+                    <td class="api">q</td>
+                    <td class="api">The sentence you want to translate.<br>Use UTF-8.<br><b>Max 500 bytes</b></td>
+                    <td class="api">Mandatory</td>
+                    <td class="api">Hello World!</td>
+                </tr>
+                <tr>
+                    <td class="api">langpair</td>
+                    <td class="api">Source and language pair, separated by the | symbol. Use ISO standard names or RFC3066</td>
+                    <td class="api">Mandatory</td>
+                    <td class="api">en|it</td>
+                </tr>
+                <tr>
+                    <td class="api">mt</td>
+                    <td class="api">Enables Machine Translation in results.<br>You can turn it off if you want just human segments</td>
+                    <td class="api">Optional</td>
+                    <td class="api">1 (default), 0</td>
+                </tr>
+                <tr>
+                    <td class="api">key</td>
+                    <td class="api">Authenticates the request; matches from your private TM are returned too.<br><b>Get your key <a href="https://mymemory.translated.net/doc/keygen.php" target="_blank">here</a> or use the keygen API</b></td>
+                    <td class="api">Optional</td>
+                    <td class="api"></td>
+                </tr>
+                <tr>
+                    <td class="api">onlyprivate</td>
+                    <td class="api">If your request is authenticated, returns only matches from your private TM</td>
+                    <td class="api">Optional</td>
+                    <td class="api">0 (default), 1</td>
+                </tr>
+                <tr>
+                    <td class="api">ip</td>
+                    <td class="api">The IP of the end user generating the request.<br><b>Recommended for CAT tools and high volume usage</b><br>Originating IP is always overridden by <i>X-Forwarded-For</i> header, if the latter is set</td>
+                    <td class="api">Optional</td>
+                    <td class="api">93.81.217.71</td>
+                </tr>
+                <tr>
+                    <td class="api">de</td>
+                    <td class="api">A valid email where we can reach you in case of troubles.<br><b>Recommended for CAT tools and high volume usage</b></td>
+                    <td class="api">Optional</td>
+                    <td class="api">user@yourdomain.com</td>
+                </tr>
+                <tr>
+                    <td class="api">user</td>
+                    <td class="api">Authenticates the request; matches from your private TM are returned too</td>
+                    <td class="api">Optional, but needs the key parameter.<br>Kept for backward compatibility only: now the <b>key</b> parameter alone is sufficient</td>
+                    <td class="api"></td>
+                </tr>
+
+
+            </tbody></table>
+            <br>
+            <br>
+            <h1>Keygen</h1>
+            <p>Generates the key associated with a username.</p>
+            <p>Call example: </p>
+            <p><strong>https://api.mymemory.translated.net/keygen?user=username&amp;pass=password</strong></p>
+
+            <p>Parameter description:</p>
+
+            <table class="api">
+                <tbody><tr>
+                    <td class="api"><strong>Parameter</strong></td>
+                    <td class="api"><strong>Description</strong></td>
+                    <td class="api"><strong>Type</strong></td>
+                    <td class="api"><strong>Example value</strong></td>
+                </tr>
+                <tr>
+                    <td class="api">user</td>
+                    <td class="api">The username whose key we want to generate</td>
+                    <td class="api">Mandatory</td>
+                    <td class="api"></td>
+                </tr>
+                <tr>
+                    <td class="api">pass</td>
+                    <td class="api">The password associated with the username</td>
+                    <td class="api">Mandatory</td>
+                    <td class="api"></td>
+                </tr>
+            </tbody></table>
+            <br><br>
+
+            <h1>Set</h1>
+            <p>Contributes a translation unit (segment and translation) in some language pair to MyMemory.<br>
+                Without specifying any <b>key</b> parameter, the contribution is available for everybody (Thank you!).</p>
+            <p>Call example: </p>
+            <!--<p><strong><a href="http://mymemory.translated.net/api/set?seg=Hello World&tra=Ciao Mondo&langpair=en|it" target="_blank">http://mymemory.translated.net/api/set?seg=Hello World&tra=Ciao mondo&langpair=en|it</a></strong></p>-->
+            <p><strong>https://api.mymemory.translated.net/set?seg=Hello World!&amp;tra=Ciao Mondo!&amp;langpair=en|it</strong></p>
+
+            <p>Parameter description:</p>
+
+            <table class="api">
+                <tbody><tr>
+                    <td class="api"><strong>Parameter</strong></td>
+                    <td class="api"><strong>Description</strong></td>
+                    <td class="api"><strong>Type</strong></td>
+                    <td class="api"><strong>Example value</strong></td>
+                </tr>
+                <tr>
+                    <td class="api">seg</td>
+                    <td class="api">The sentence you want to add in source language. Use UTF-8</td>
+                    <td class="api">Mandatory</td>
+                    <td class="api">Hello World</td>
+                </tr>
+                <tr>
+                    <td class="api">tra</td>
+                    <td class="api">The sentence you want to add in target language. Use UTF-8</td>
+                    <td class="api">Mandatory</td>
+                    <td class="api">Ciao Mondo</td>
+                </tr>
+                <tr>
+                    <td class="api">langpair</td>
+                    <td class="api">Source and language pair, separated by the | symbol. Use ISO standard names or RFC3066</td>
+                    <td class="api">Mandatory</td>
+                    <td class="api">en|it</td>
+                </tr>
+                <tr>
+                    <td class="api">key</td>
+                    <td class="api">Authenticates the request; the translation will be submitted into your private TM only.<br><b>Get your key <a href="https://mymemory.translated.net/doc/keygen.php" target="_blank">here</a> or use the keygen API</b></td>
+                    <td class="api">Optional</td>
+                    <td class="api"></td>
+                </tr>
+                <!--tr>
+                                            <td class="api">ip</td>
+                                            <td class="api">The IP of the end user generating the request.<br/>Reccomended for CAT tools and high volume usage</td>
+                                            <td class="api">Optional</td>
+                                            <td class="api">93.81.217.71</td>
+                                    </tr>-->
+                <tr>
+                    <td class="api">de</td>
+                    <td class="api">A valid email where we can reach you in case of troubles.<br><b>Recommended for CAT tools and high volume usage</b></td>
+                    <td class="api">Optional</td>
+                    <td class="api">user@yourdomain.com</td>
+                </tr>
+
+
+            </tbody></table>
+            <br><br>
+
+
+            <h1 id="TMX">Import</h1>
+            <p>Contributes a whole translation memory (in TMX format) to MyMemory.<br>
+                It accepts multi-language memories and it autodetects languages from internal meta-information.<br>
+                Without specifying any <b>key</b> parameter, the contribution is available for everybody (Thank you!).</p>
+            <p>
+                <b>This method is <a href="https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.2" target="_blank">multipart/form-data</a> only (no GET parameters are allowed).<br>All fields are <i>type="text"</i> controls, except for tmx which is <i>type="file"</i></b>.
+            </p>
+            <p>Call example: </p>
+            <p><strong>https://api.mymemory.translated.net/tmx/import</strong>
+            </p>
+            <p> The API call is non-blocking: it returns as soon as the file upload is finished; the real processing, that will eventually take place depending on system load, can be tracked with <b>status</b> API.
+            </p>
+
+            <p>Parameter description:</p>
+
+            <table class="api">
+                <tbody><tr>
+                    <td class="api"><strong>Form control</strong></td>
+                    <td class="api"><strong>Description</strong></td>
+                    <td class="api"><strong>Type</strong></td>
+                    <td class="api"><strong>Example value</strong></td>
+                </tr>
+                <tr>
+                    <td class="api">tmx</td>
+                    <td class="api">The file you want to import.<br><b>This is the type="file" form control</b>.</td>
+                    <td class="api">Mandatory</td>
+                    <td class="api">hugefile.tmx</td>
+                </tr>
+                <tr>
+                    <td class="api">name</td>
+                    <td class="api">Short import description (file name is autodetected)</td>
+                    <td class="api">Optional</td>
+                    <td class="api">First import</td>
+                </tr>
+                <tr>
+                    <td class="api">subj</td>
+                    <td class="api">The subject of the TM you are importing.<br>Use <b>subjects</b> API for a complete list</td>
+                    <td class="api">Optional</td>
+                    <td class="api">Medical</td>
+                </tr>
+                <tr>
+                    <td class="api">private</td>
+                    <td class="api">Whether you want to make it available to other people or just to you</td>
+                    <td class="api">Optional</td>
+                    <td class="api">0 is public, 1 is private (default)</td>
+                </tr>
+                <tr>
+                    <td class="api">key</td>
+                    <td class="api">Authenticates the request.<br><b>Get your key <a href="https://mymemory.translated.net/doc/keygen.php" target="_blank">here</a> or use the keygen API</b></td>
+                    <td class="api">Optional</td>
+                    <td class="api"></td>
+                </tr>
+                <tr>
+                    <td class="api">surl</td>
+                    <td class="api">Context information for source language, in the form of a URL</td>
+                    <td class="api">Optional</td>
+                    <td class="api">https://www.somesite.com/en/somepage#paragraph</td>
+                </tr>
+                <tr>
+                    <td class="api">turl</td>
+                    <td class="api">Context information for target language, in the form of a URL</td>
+                    <td class="api">Optional</td>
+                    <td class="api">https://www.somesite.com/en/somepage#paragraph</td>
+                </tr>
+
+            </tbody></table>
+            <br><br>
+
+            <h1>Status</h1>
+            <p>Checks the status of a TM import.<br>
+            </p>
+            <p>Call example: </p>
+            <p><strong>https://api.mymemory.translated.net/tmx/status?key=yourkey</strong>
+            </p>
+            <p>Parameter description:</p>
+
+            <table class="api">
+                <tbody><tr>
+                    <td class="api"><strong>Parameter</strong></td>
+                    <td class="api"><strong>Description</strong></td>
+                    <td class="api"><strong>Type</strong></td>
+                    <td class="api"><strong>Example value</strong></td>
+                </tr>
+                <tr>
+                    <td class="api">key</td>
+                    <td class="api">Authenticates the request.<br><b>Get your key <a href="https://mymemory.translated.net/doc/keygen.php" target="_blank">here</a> or use the keygen API</b></td>
+                    <td class="api">Mandatory</td>
+                    <td class="api"></td>
+                </tr>
+                <tr>
+                    <td class="api">name</td>
+                    <td class="api">Filter on import description (partial matches are supported, no wildcards)</td>
+                    <td class="api">Optional</td>
+                    <td class="api"></td>
+                </tr>
+                <tr>
+                    <td class="api">status</td>
+                    <td class="api">Filters on importing outcome (0=in queue, 1=done, 2=error)</td>
+                    <td class="api">Optional</td>
+                    <td class="api">2</td>
+                </tr>
+            </tbody></table>
+            <br><br>
+
+            <h1>Subjects</h1>
+            <p>List available subjects in MyMemory for querying and TM importing.<br>
+            </p><p>Call example: </p>
+            <p><strong><a href="https://api.mymemory.translated.net/subjects" target="_blank">https://api.mymemory.translated.net/subjects</a></strong>
+
+
+                <br><br>
+
+
+            </p><p><font color="#0066CE"><strong>Note: </strong></font>We also have an <a href="https://translated.com/translation-api">API for on-demand human translation services</a>.
+            </p>
+
+
+        </div>
+    </td>
+</tr>
+</tbody></table>
+
+<script type="text/javascript" async="" src="./MyMemory API technical specifications page_files/js"></script><script async="" src="./MyMemory API technical specifications page_files/analytics.js.download"></script><script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-874793-3', 'auto');
+    ga('require', 'GTM-WXLPS6H');ga('set', 'contentGroup1', 'Ads Disabled');ga('send', 'pageview');
+    </script>
+<!-- the doc's footer -->
+
+
+</body></html>
