@@ -25,21 +25,7 @@ A TRANSLATOR MADE USING USING HTML,CSS AND JAVASCRIPT HAVE VISUAL DELITE VISUAL 
 ![image](https://user-images.githubusercontent.com/102304867/192353338-205ad93e-199f-45cf-a707-f9c8fe07e9a9.png)
 
 
-## Authors
 
-- [@anusthan12](https://github.com/anusthan12)
-collaboration with
-- [@abhishekxgithub](https://github.com/abhishekxgithub)
-
-
-{
-
-- HTML By :- - [@abhishekxgithub](https://github.com/abhishekxgithub)
-- CSS By :-  [@abhishekxgithub](https://github.com/abhishekxgithub) 
-- CSS (Color Palette , Animation) - [@anusthan12](https://github.com/anusthan12)
-- JS - [@anusthan12](https://github.com/anusthan12)
-  
-}
 ## API Reference
 
 #### Get all items
